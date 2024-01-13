@@ -1,25 +1,23 @@
-train01.12-2 from 01.12-1, sampling uniform LSE, MNIST
-train01.12-1 from 01.11-2, sampling LSE, MNIST
+train01.13-1 from 01.11-10, Resblock Min, MNIST
 
-train01.11-18 from 01.11-2, Min Uniform, batch=1024, MNIST
-train01.11-17 from 01.11-2, Min Uniform, batch=512, MNIST
-train01.11-16 from 01.11-2, Min Uniform, batch=256, MNIST
-train01.11-15 from 01.11-2, Min Uniform, batch=128, MNIST
-train01.11-14_1 from 01.11-14, Min Sqrt Uniform, batch=64, MNIST
-train01.11-14 from 01.11-2, Min Uniform, batch=64, MNIST
-train01.11-13 from 01.11-2, Min Uniform, batch=32, MNIST
-train01.11-12 from 01.11-2, Min Uniform, batch=16, MNIST
-train01.11-11 from 01.11-2, Min Uniform, batch=8, MNIST
+train01.12-9 from 01.12-2, Sampling LSE Uniform sigma=8e-1, MNIST
+train01.12-8 from 01.12-2, Sampling LSE Uniform sigma=7e-1, MNIST
+train01.12-7 from 01.12-2, Sampling LSE Uniform sigma=6e-1, MNIST
+train01.12-6 from 01.12-2, Sampling LSE Uniform sigma=5e-1, MNIST
+train01.12-5 from 01.12-2, Sampling LSE Uniform sigma=4e-1, MNIST
+train01.12-4 from 01.12-2, Sampling LSE Uniform sigma=3e-1, MNIST
+train01.12-3 from 01.12-2, Sampling LSE Uniform sigma=2e-1, MNIST
+train01.12-2 from 01.11-2, Sampling LSE Uniform sigma=1e-1, MNIST
 
+train01.11-11 from 01.11-2, Trainble Sigma LSE Uniform, MNIST
 train01.11-10 from 01.11-2, Min, MNIST
-
-train01.11-9 from 01.11-2, LSE sigma=8e-0, MNIST
-train01.11-8 from 01.11-2, LSE sigma=4e-0, MNIST
-train01.11-7 from 01.11-2, LSE sigma=2e-0, MNIST
-train01.11-6 from 01.11-2, LSE sigma=1e-0, MNIST
-train01.11-5 from 01.11-2, LSE sigma=8e-1, MNIST
-train01.11-4 from 01.11-2, LSE sigma=4e-1, MNIST
-train01.11-3 from 01.11-2, LSE sigma=2e-1, MNIST
-train01.11-2 from 01.11-1, LSE sigma=1e-1, MNIST
+train01.11-9 from 01.11-2, LSE Uniform sigma=5e-1, MNIST
+train01.11-8 from 01.11-2, LSE Uniform sigma=4e-1, MNIST
+train01.11-7 from 01.11-2, LSE Uniform sigma=3e-1, MNIST
+train01.11-6 from 01.11-2, LSE Uniform sigma=2e-1, MNIST
+train01.11-5 from 01.11-2, LSE Uniform sigma=1e-1, MNIST
+train01.11-4 from 01.11-2, LSE Uniform sigma=9e-2, MNIST
+train01.11-3 from 01.11-2, LSE Uniform sigma=8e-2, MNIST
+train01.11-2 from 01.11-1, LSE Uniform sigma=7e-2, MNIST
 
 train01.11-1 VAE MNIST
