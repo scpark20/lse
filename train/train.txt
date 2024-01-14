@@ -1,3 +1,18 @@
+
+train01.14-7 from train01.14-1, Min, CELEBA
+
+### exp. : LSE vs. Min vs. AE
+train01.14-9 from train01.14-4, Models Normal Min, MNIST
+train01.14-8 from train01.14-4, Models VAE, MNIST
+train01.14-6 from train01.14-4, Models AE, MNIST
+train01.14-5 from train01.14-4, Models LSE trainable sigma, MNIST
+train01.14-4 from train01.14-1, Models Min, MNIST
+
+### exp. : LSE trainable sigma vs. LSE optimal sigma vs. Min
+train01.14-3 from train01.11-10, LSE optimal sigma, MNIST
+train01.14-2 from train01.11-10, LSE trainable sigma, MNIST
+train01.14-1 from train01.11-10, Min, MNIST
+
 train01.13-1 from 01.11-10, Resblock Min, MNIST
 
 train01.12-9 from 01.12-2, Sampling LSE Uniform sigma=8e-1, MNIST
@@ -9,6 +24,7 @@ train01.12-4 from 01.12-2, Sampling LSE Uniform sigma=3e-1, MNIST
 train01.12-3 from 01.12-2, Sampling LSE Uniform sigma=2e-1, MNIST
 train01.12-2 from 01.11-2, Sampling LSE Uniform sigma=1e-1, MNIST
 
+train01.11-12 from 01.11-11, Random Sigma LSE Uniform, MNIST
 train01.11-11 from 01.11-2, Trainble Sigma LSE Uniform, MNIST
 train01.11-10 from 01.11-2, Min, MNIST
 train01.11-9 from 01.11-2, LSE Uniform sigma=5e-1, MNIST

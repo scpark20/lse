@@ -2,6 +2,18 @@ import torch
 import librosa
 import numpy as np
 
+def save_model_list(save_dir, step, model_list, optimizer_list):
+    path = save_dir + 'save_' + str(step)
+    models_state_dict = {}
+    optimizers_state_dict = {}
+    for i, (model, optimizer) in enumerate(zip(model_list, optimizer_list)):
+        models_state_dict[i] = model.state_dict()
+        optimizers_state_dict[i] = optimizer.state_dict()
+    torch.save({'step': step,
+                'models_state_dict': models_state_dict,
+                'optimizers_state_dict': optimizers_state_dict},
+                path)    
+    
 def save(save_dir, step, model, optimizer):
     path = save_dir + 'save_' + str(step)
     torch.save({'step': step,

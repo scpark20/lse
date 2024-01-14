@@ -3,18 +3,18 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 class ResBlock(nn.Module):
-    def __init__(self, in_dim, h_dim):
+    def __init__(self, in_dim):
         super().__init__()
-        self.block = nn.Sequential(nn.Conv2d(in_dim, h_dim, kernel_size=1),
-                                   nn.BatchNorm2d(h_dim),
-                                   nn.LeakyReLU(),
-                                   nn.Conv2d(h_dim, h_dim, kernel_size=3, padding=1),
-                                   nn.BatchNorm2d(h_dim),
-                                   nn.LeakyReLU(),
-                                   nn.Conv2d(h_dim, h_dim, kernel_size=3, padding=1),
-                                   nn.BatchNorm2d(h_dim),
-                                   nn.LeakyReLU(),
-                                   nn.Conv2d(h_dim, in_dim, kernel_size=1))
+        self.block = nn.Sequential(nn.Conv2d(in_dim, in_dim, kernel_size=1),
+                                   nn.BatchNorm2d(in_dim),
+                                   nn.ReLU(),
+                                   nn.Conv2d(in_dim, in_dim, kernel_size=3, padding=1),
+                                   nn.BatchNorm2d(in_dim),
+                                   nn.ReLU(),
+                                   nn.Conv2d(in_dim, in_dim, kernel_size=3, padding=1),
+                                   nn.BatchNorm2d(in_dim),
+                                   nn.ReLU(),
+                                   nn.Conv2d(in_dim, in_dim, kernel_size=1))
         
     def forward(self, x):
         y = x + self.block(x)
@@ -36,16 +36,16 @@ class Decoder(nn.Module):
         for h_dim in h_dims[::-1]:
             up = nn.Sequential(nn.ConvTranspose2d(in_dim, h_dim, kernel_size=3, stride=2, padding=1, output_padding=1),
                                  nn.BatchNorm2d(h_dim),
-                                 nn.LeakyReLU())
+                                 nn.ReLU())
             ups.append(up)
-            block = nn.Sequential(*[ResBlock(h_dim, h_dim) for _ in range(n_blocks)])
+            block = nn.Sequential(*[ResBlock(h_dim) for _ in range(n_blocks)])
             blocks.append(block)
             in_dim = h_dim
         self.ups = nn.ModuleList(ups)
         self.blocks = nn.ModuleList(blocks)
         self.out_conv = nn.Sequential(nn.ConvTranspose2d(h_dim, h_dim, kernel_size=3, stride=2, padding=1, output_padding=1),
                                       nn.BatchNorm2d(h_dim),
-                                      nn.LeakyReLU(),
+                                      nn.ReLU(),
                                       nn.Conv2d(h_dim, out_dim, kernel_size=3, padding=1),
                                       nn.Tanh())
         

@@ -4,14 +4,14 @@ import torch.nn.functional as F
 import numpy as np
 
 class LatentLayer(nn.Module):
-    def __init__(self, init_log_sigma, **kwargs):
+    def __init__(self, **kwargs):
         super().__init__()
-        self.log_sigma = nn.Parameter(torch.ones(1) * init_log_sigma)
                 
     def forward(self, data, **kwargs):
 
         M = kwargs['M']
-        sigma = torch.exp(self.log_sigma)
+        log_sigma = torch.rand(1).to(data['z'].device) * 2 - 3
+        sigma = torch.exp(log_sigma)
         data['z'] = torch.tanh(data['z'])
         mean = data['z']
         z_dim = mean.shape[1]
@@ -23,7 +23,7 @@ class LatentLayer(nn.Module):
         distance = torch.norm(mean.unsqueeze(1) - e.unsqueeze(0), dim=2) ** 2
         alpha = -1/(2*sigma**2)
         loss = -torch.mean(torch.logsumexp(alpha*distance, dim=0))
-        loss = loss + 0.5*z_dim*(2*self.log_sigma-np.log(np.e)) + np.log(N)
+        loss = loss + 0.5*z_dim*(2*log_sigma-np.log(np.e)) + np.log(N)
         data['lse_loss'] = loss
         
         return data
