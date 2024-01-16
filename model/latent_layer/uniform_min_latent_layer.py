@@ -18,6 +18,7 @@ class LatentLayer(nn.Module):
         # (N, M) = sum((N, 1, z) - (1, M, z), dim=2)
         distance = torch.sum((mean.unsqueeze(1) - e.unsqueeze(0)) ** 2, dim=2)
         loss = torch.mean(torch.min(distance, dim=0).values)
+        
         data['lse_loss'] = loss
         
         return data

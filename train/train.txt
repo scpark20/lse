@@ -1,7 +1,28 @@
+train01.16-1 from train01.14-17, Models normal_to_disrete LSE, MNIST
+
+### Experiments
+Dataset : MNIST Loss : MOL
+Normal - VAE, Min-AE
+train01.15-3 from train01.15-1, train01.14-8 : VAE
+
+Uniform - Min-AE, LSE-AE
+train01.15-2 from train01.15-1, train01.14-5 : LSE-AE
+train01.15-1 from train01.14-4 : Min-AE
 
 train01.14-7 from train01.14-1, Min, CELEBA
 
 ### exp. : LSE vs. Min vs. AE
+train01.14-18 from train01.14-17, Models Spiral tLSE, MNIST
+train01.14-17 from train01.14-15, Models Spiral LSE, MNIST
+train01.14-16 from train01.14-11, Models MMD-IMQ-Spiral, MNIST
+train01.14-15 from train01.14-4, Models Spiral Min, MNIST
+
+train01.14-14 from train01.14-11, Models MMD-RBF-Normal, MNIST
+train01.14-13 from train01.14-11, Models MMD-RBF-Uniform, MNIST
+train01.14-12 from train01.14-11, Models MMD-IMQ-Normal, MNIST
+train01.14-11 from train01.14-4, Models MMD-IMQ-Uniform, MNIST
+
+train01.14-10 from train01.14-5, Models LSE trainable sigma, temperature, MNIST
 train01.14-9 from train01.14-4, Models Normal Min, MNIST
 train01.14-8 from train01.14-4, Models VAE, MNIST
 train01.14-6 from train01.14-4, Models AE, MNIST

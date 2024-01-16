@@ -14,6 +14,7 @@ class LatentLayer(nn.Module):
         
         z_mean = data['z_mean']
         z_logvar = data['z_logvar']
+        data['kl'] = -0.5 * torch.sum(1 + z_logvar - z_mean**2 - z_logvar.exp(), dim=1)
         data['kl_loss'] = torch.mean(-0.5 * torch.sum(1 + z_logvar - z_mean**2 - z_logvar.exp(), dim=1))
         
         return data
