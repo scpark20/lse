@@ -1,7 +1,7 @@
 import torch
 import numpy as np
 
-def generate_spiral_data_torch(points_per_class, num_classes):
+def generate_spiral_data_torch(points_per_class, num_classes=5):
     """
     This function generates spiral data with the specified number of points per class
     and the specified number of classes using PyTorch.

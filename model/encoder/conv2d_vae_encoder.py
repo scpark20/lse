@@ -26,5 +26,6 @@ class Encoder(nn.Module):
         y = torch.flatten(y, start_dim=1)
         y = self.linear(y)
         data['z_mean'], data['z_logvar'] = y.split(y.shape[1]//2, dim=1)
+        data['z'] = data['z_mean'] + torch.exp(0.5*data['z_logvar']) * torch.randn_like(data['z_logvar'])
         return data
         

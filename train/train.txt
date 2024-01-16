@@ -1,4 +1,17 @@
-train01.16-1 from train01.14-17, Models normal_to_disrete LSE, MNIST
+
+### Experiments, VAE, LSE, IMQ - Normal, Uniform, Spiral
+train01.16-10, from 01.16-9, Spiral SWAE
+train01.16-7, Spiral MMD-IMQ
+train01.16-6, Spiral LSE
+
+train01.16-9, from 01.16-8, Uniform SWAE
+train01.16-5, Uniform MMD-IMQ
+train01.16-4, Uniform LSE
+
+train01.16-8, from 01.16-3, Normal SWAE
+train01.16-3, Normal MMD-IMQ
+train01.16-2, Normal LSE
+train01.16-1, Normal VAE
 
 ### Experiments
 Dataset : MNIST Loss : MOL
