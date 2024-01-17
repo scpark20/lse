@@ -13,8 +13,12 @@ class Prior(nn.Module):
         z_dim = data['z'].shape[1]
         
         # (M, z)
-        data['e'] = generate_spiral_data_torch(M//5+1, 5)[0]
-        data['e'] = data['e'][torch.randperm(len(data['e']))]
-        data['e'] = data['e'][:M].to(data['z'].device)
+        data['e'] = self.sample(M, z_dim)
         return data
-        
+       
+    def sample(self, M, z_dim):
+        # (M, z)
+        samples = generate_spiral_data_torch(M//5+1, 5)[0]
+        samples = samples[torch.randperm(len(samples))]
+        samples = samples[:M].cuda()
+        return samples

@@ -12,6 +12,12 @@ class Prior(nn.Module):
         z_dim = data['z'].shape[1]
         
         # (M, z)
-        data['e'] = torch.randn(M, z_dim).cuda()
+        data['e'] = self.sample(M, z_dim)
         return data
+    
+    def sample(self, M, z_dim):
+        # (M, z)
+        samples = torch.randn(M, z_dim).cuda()
+        return samples
+        
         
