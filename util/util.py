@@ -21,6 +21,16 @@ def save(save_dir, step, model, optimizer):
                 'optimizer_state_dict': optimizer.state_dict()}, 
                 path)
     
+def load_model_list(load_dir, step, model_list, optimizer_list):
+    path = load_dir + 'save_' + str(step)
+    checkpoint = torch.load(path, map_location=torch.device('cpu'))
+    # warm start
+    for i, (model, optimizer) in enumerate(zip(model_list, optimizer_list)):
+        model.load_state_dict(checkpoint['models_state_dict'][i], strict=True)
+        optimizer.load_state_dict(checkpoint['optimizers_state_dict'][i])
+    step = checkpoint['step']
+    return step, model_list, optimizer_list
+    
 def load(save_dir, step, model, optimizer):
     path = save_dir + 'save_' + str(step)
     checkpoint = torch.load(path, map_location=torch.device('cpu'))    

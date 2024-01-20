@@ -1,0 +1,9 @@
+01.19-8 from 01.19-5, dalle net64 lse+commit loss /imagenet
+01.19-7 from 01.19-5, dalle net64 lse+commit loss /celeba
+01.19-6 dalle lse + commit loss
+01.19-5 dalle resblock lse + commit loss
+01.19-4 dalle resblock lse EMA embedding
+01.19-4 dalle resblock lse anneling 100*1000
+01.19-3 dalle resblock lse
+01.19-2 dalle multi lse
+01.19-1 dalle lse

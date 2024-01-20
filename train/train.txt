@@ -1,5 +1,6 @@
 
 ### Experiments, VAE, LSE, IMQ - Normal, Uniform, Spiral
+train01.16-11, Spiral DMin
 train01.16-10, from 01.16-9, Spiral SWAE
 train01.16-7, Spiral MMD-IMQ
 train01.16-6, Spiral LSE

@@ -4,9 +4,9 @@ import torch.nn.functional as F
 import numpy as np
 
 class Latent(nn.Module):
-    def __init__(self, init_log_sigma, **kwargs):
+    def __init__(self, init_log_sigma, const_sigma, **kwargs):
         super().__init__()
-        self.log_sigma = nn.Parameter(torch.ones(1) * init_log_sigma)
+        self.log_sigma = nn.Parameter(torch.ones(1) * init_log_sigma, requires_grad=not const_sigma)
                 
     def forward(self, data, **kwargs):
         # data['z'] : (N, c)
@@ -24,4 +24,3 @@ class Latent(nn.Module):
         data['lse_loss'] = loss
 
         return data
-        

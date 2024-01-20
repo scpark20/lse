@@ -1,0 +1,36 @@
+train01.19-1 from train01.18-3e-3, BMin Uniform
+
+train01.18-10 from 01.18-9, LSE multi randn, const sigma
+train01.18-9 from 01.18-6, LSE randn, const sigma
+train01.18-8 from 01.18-6, Min randn
+
+train01.18-7 from 01.18-6, LSE rand
+train01.18-6 from 01.17-2, LSE randn
+
+train01.18-5 from 01.18-1, BLSE beta=1e-2, Uniform
+train01.18-2e-2 from 01.18-4, BLSE beta=2e-2, Uniform
+train01.18-3e-2 from 01.18-4, BLSE beta=3e-2, Uniform
+train01.18-4e-2 from 01.18-4, BLSE beta=4e-2, Uniform
+train01.18-4 from 01.18-1, BLSE beta=5e-2, Uniform
+train01.18-6e-2 from 01.18-4, BLSE beta=6e-2, Uniform
+train01.18-7e-2 from 01.18-4, BLSE beta=7e-2, Uniform
+train01.18-8e-2 from 01.18-4, BLSE beta=8e-2, Uniform
+train01.18-9e-2 from 01.18-4, BLSE beta=9e-2, Uniform
+train01.18-3 from 01.18-1, BLSE beta=1e-1, Uniform
+train01.18-2 from 01.18-1, BLSE beta=5e-1, Uniform
+train01.18-1 from 01.17-9, BLSE beta=1, Uniform
+
+train01.17-11 BDMin (Bottleneck-Double Min) Uniform
+train01.17-12 BMin (Bottleneck Min) Normal
+train01.17-10 BMin (Bottleneck Min) Uniform
+
+train01.17-9 BLSE const sigma, t=0.1 Uniform
+train01.17-8 BLSE const sigma, t=0.1 Normal
+train01.17-7 SWAE Uniform
+train01.17-6 MMD Uniform
+train01.17-5 LSE Uniform
+
+train01.17-4 SWAE Normal
+train01.17-3 MMD Normal
+train01.17-2 LSE Normal
+train01.17-1 VAE Normal

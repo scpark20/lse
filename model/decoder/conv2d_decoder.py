@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 class Decoder(nn.Module):
-    def __init__(self, size, out_dim, z_dim, h_dims=[32, 64, 128, 256, 512], **kwargs):
+    def __init__(self, size, out_dim, z_dim, h_dims=[32, 64, 128, 256, 512], activation=F.tanh, **kwargs):
         super().__init__()
         
         size = size // 2 ** len(h_dims)
@@ -24,8 +24,8 @@ class Decoder(nn.Module):
         self.out_conv = nn.Sequential(nn.ConvTranspose2d(h_dim, h_dim, kernel_size=3, stride=2, padding=1, output_padding=1),
                                       nn.BatchNorm2d(h_dim),
                                       nn.LeakyReLU(),
-                                      nn.Conv2d(h_dim, 3, kernel_size=3, padding=1),
-                                      nn.Tanh())
+                                      nn.Conv2d(h_dim, 3, kernel_size=3, padding=1))
+        self.activation = activation
         
     def forward(self, data, **kwargs):
         # x : (b, c, h, w)
@@ -35,6 +35,7 @@ class Decoder(nn.Module):
         y = y.reshape(y.shape[0], self.in_dim, self.size, self.size)
         y = self.convs(y)
         y = self.out_conv(y)
+        y = self.activation(y)
         data['y'] = y
         data['recon_loss'] = F.mse_loss(data['y'], data['x'])
         return data
@@ -44,4 +45,5 @@ class Decoder(nn.Module):
         y = y.reshape(y.shape[0], self.in_dim, self.size, self.size)
         y = self.convs(y)
         y = self.out_conv(y)
+        y = self.activation(y)
         return y
