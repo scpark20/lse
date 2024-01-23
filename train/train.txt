@@ -1,3 +1,4 @@
+train01.21-1, Circle LSE
 
 ### Experiments, VAE, LSE, IMQ - Normal, Uniform, Spiral
 train01.16-11, Spiral DMin

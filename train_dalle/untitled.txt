@@ -1,5 +1,15 @@
+01.21-5 from 01.21-2, dalle linear divided binary vqvae /celeba
+01.21-4 from 01.21-2, dalle linear binary vqvae /celeba
+01.21-3 from 01.21-2, dalle nonlinear vqvae /celeba
+01.21-2 from 01.21-1, dalle nonlinear binary vqvae /celeba
+01.21-1 from 01.19-12, dalle vqvae /celeba
+
+01.19-12 from 01.19-7, dalle net64 lse+EMA prior, prior noise 1e-2 /celeba
+01.19-11 from 01.19-7, dalle net64 lse+EMA prior, not const sigma /celeba
+01.19-10 from 01.19-7, dalle net64 commit+EMA prior /celeba
+01.19-9 from 01.19-7, dalle enc/dec lse+EMA prior /celeba
 01.19-8 from 01.19-5, dalle net64 lse+commit loss /imagenet
-01.19-7 from 01.19-5, dalle net64 lse+commit loss /celeba
+01.19-7 from 01.19-5, dalle net64 lse+EMA prior /celeba
 01.19-6 dalle lse + commit loss
 01.19-5 dalle resblock lse + commit loss
 01.19-4 dalle resblock lse EMA embedding

@@ -21,15 +21,10 @@ class Latent(nn.Module):
         # (NHW, M) = sum((NHW, 1, z) - (1, M, z), dim=2)
         distance = torch.norm(z.unsqueeze(1) - data['e'].unsqueeze(0), dim=2) ** 2
         alpha = -1/(2*torch.exp(self.log_sigma)**2)
-        loss = -torch.mean(T*torch.logsumexp(alpha*distance/T, dim=0))
+        matrix = alpha*distance/T
+        data['matrix'] = matrix
+        loss = -torch.mean(T*torch.logsumexp(matrix, dim=0))
         loss = loss + 0.5*z_dim*(2*self.log_sigma-np.log(np.e)) + np.log(N)        
         data['lse_loss'] = loss
         
-        # (1,)
-        a = -0.5*z_dim*(np.log(2*np.pi)+2*self.log_sigma)
-        # (NHW, M)
-        b = -0.5/torch.exp(2*self.log_sigma)
-        log_likelihood = a[:, None] + b[:, None]*distance
-        data['e_new'] = z.T @ F.softmax(log_likelihood, dim=0)
-
         return data

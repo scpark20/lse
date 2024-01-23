@@ -27,7 +27,9 @@ class Quantizer(nn.Module):
         # (N, c, H, W)
         z_q = z_q.reshape(N, H, W, z_dim).permute(0, 3, 1, 2)
         
-        if self.quantize:
+        data['commit_loss'] = F.mse_loss(data['z'], z_q)
+        
+        if self.quantize or 'quantize' in kwargs:
             data['ze'] = data['z']
             data['commit_loss'] = F.mse_loss(data['z'], z_q)
             data['z'] = data['z'] + (1-T)*(z_q - data['z']).detach()
