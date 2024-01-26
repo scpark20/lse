@@ -1,7 +1,12 @@
+01.25-1 from 01.19-7_uniform_notconst_1e-4_lr1e-3, lse, not sigma const /mnist
+
 01.21-5 from 01.21-2, dalle linear divided binary vqvae /celeba
 01.21-4 from 01.21-2, dalle linear binary vqvae /celeba
 01.21-3 from 01.21-2, dalle nonlinear vqvae /celeba
 01.21-2 from 01.21-1, dalle nonlinear binary vqvae /celeba
+
+01.21-1_3, dalle vqvae cold start /celeba
+01.21-1_2, dalle vqvae from train01.19-7_tanh_0.99.ipynb /celeba
 01.21-1 from 01.19-12, dalle vqvae /celeba
 
 01.19-12 from 01.19-7, dalle net64 lse+EMA prior, prior noise 1e-2 /celeba

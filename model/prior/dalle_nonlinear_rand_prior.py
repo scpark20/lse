@@ -7,9 +7,16 @@ class Prior(nn.Module):
         super().__init__()
         self.M = n_prior_embeddings
         self.z_dim = z_dim
-        self.prior_sum = nn.Parameter(torch.randn(n_prior_embeddings, z_dim), requires_grad=False)
+        self.prior_sum = nn.Parameter(torch.rand(n_prior_embeddings, z_dim)*uniform_max*2-uniform_max, requires_grad=False)
         self.prior_elem = nn.Parameter(torch.ones(n_prior_embeddings), requires_grad=False)
         self.mu = prior_mu
+        self.nonlinear = nn.Sequential(nn.Conv2d(z_dim, z_dim*4),
+                                       nn.Tanh(),
+                                       nn.Conv2d(z_dim*4, z_dim*4),
+                                       nn.Tanh(),
+                                       nn.Conv2d(z_dim*4, z_dim*4),
+                                       nn.Tanh(),
+                                       nn.Conv2d(z_dim*4, z_dim))
     
     @property
     def prior(self):
@@ -54,6 +61,8 @@ class Prior(nn.Module):
         
         # (M, z)
         data['e'] = self.sample()
+        # (N, z, H, W
+        data['z'] = self.nonlinear(data['z'])
         # (NHW, z)
         ze = data['z'].permute(0, 2, 3, 1).reshape(-1, self.z_dim)
         # (NHW,)
