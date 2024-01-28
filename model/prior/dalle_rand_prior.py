@@ -3,7 +3,8 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 class Prior(nn.Module):
-    def __init__(self, n_prior_embeddings, z_dim, prior_mu=0.99, uniform_max=1, z_activation=None, nonlinear=None, **kwargs):
+    def __init__(self, n_prior_embeddings, z_dim, prior_mu=0.99, uniform_max=1,
+                 z_activation=None, nonlinear=None, noise=0, **kwargs):
         super().__init__()
         self.M = n_prior_embeddings
         self.z_dim = z_dim
@@ -21,10 +22,13 @@ class Prior(nn.Module):
                                                nn.Conv2d(z_dim*4, z_dim*4, kernel_size=1),
                                                nn.Tanh(),
                                                nn.Conv2d(z_dim*4, z_dim, kernel_size=1))
+        self.noise = noise
     
     @property
     def prior(self):
         e = self.prior_sum / self.prior_elem.unsqueeze(1)
+        if self.noise > 0:
+            e = e + torch.randn_like(e) * self.noise
         return e
         
     def _quantize(self, ze):

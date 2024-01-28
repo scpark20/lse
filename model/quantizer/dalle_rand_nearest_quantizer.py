@@ -15,11 +15,7 @@ class Quantizer(nn.Module):
         N, z_dim, H, W = data['z'].size()
         z = data['z'].permute(0, 2, 3, 1).reshape(-1, z_dim)
         e = data['e']
-        T = kwargs['quant_temp'] if 'quant_temp' in kwargs else 0
-        if T == 'rand':
-            T = torch.rand(len(data['z'])).to(z.device)
-            T = T[:, None, None, None]
-        
+        T = kwargs['quant_temp'] if 'quant_temp' in kwargs else 0        
         # (N, M)
         distances = torch.cdist(z.unsqueeze(0), e.unsqueeze(0)).squeeze(0)
         # (N,)
@@ -35,9 +31,10 @@ class Quantizer(nn.Module):
         if self.quantize or 'quantize' in kwargs:
             data['ze'] = data['z']
             data['commit_loss'] = F.mse_loss(data['z'], z_q)
-            #print(data['z'].shape, z_q.shape, T.shape)
-            data['z'] = data['z'] + (1-T)*(z_q - data['z']).detach()
+            # (N, 1, 1, 1)
+            rand = torch.rand(len(data['z'])).to(data['z'].device)[:, None, None, None]
+            coeff = (1 - T) + rand * T
+            data['z'] = data['z'] + coeff*(z_q - data['z']).detach()
             data['zq'] = data['z']
             
-        
         return data

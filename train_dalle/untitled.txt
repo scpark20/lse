@@ -1,3 +1,16 @@
+01.28-1 from train01.19-7_tanh_0.999_lr1e-4.ipynb : exclusive3
+
+01.27-8 from train01.19-7_tanh_0.999_lr1e-4.ipynb : 2D
+
+01.27-7 from 01.27-5 : noise 1e-2
+01.27-6 from 01.27-5 : noise 1e-3
+01.27-5 from train01.19-7_tanh_0.999_lr1e-4.ipynb : noise 1e-4
+
+01.27-4 from 01.27-3 : norm 0.5
+01.27-3 from train01.19-7_tanh_0.999_lr1e-4.ipynb : norm 1
+01.27-2 from train01.19-7_tanh_0.999_lr1e-4.ipynb : e freeze, lse 1e-4 -> 1
+01.27-1 from train01.19-7_tanh_0.999_lr1e-4.ipynb : gumbel-softmax
+
 01.25-1 from 01.19-7_uniform_notconst_1e-4_lr1e-3, lse, not sigma const /mnist
 
 01.21-5 from 01.21-2, dalle linear divided binary vqvae /celeba

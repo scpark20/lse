@@ -13,7 +13,7 @@ class Bottle(nn.Module):
         self.register_buffer('codebook', torch.zeros(self.K, self.latent_channels))
         self.threshold = 1.0
         self.mu = 0.99
-        self.register_buffer('init', torch.zeros(1))
+        self.register_buffer('init', torch.zeros(1)) 
                 
     def _quantize(self, ze):
         # ze : (n, c)
@@ -127,14 +127,17 @@ class Bottle(nn.Module):
         return outputs
     
 class Latent(nn.Module):
-    def __init__(self, n_latents, z_dim, **kwargs):
+    def __init__(self, n_latents, z_dim, z_activation=None, **kwargs):
         super().__init__()
         self.bottle = Bottle(n_latents, z_dim)
+        self.z_activation = z_activation
                 
     def forward(self, data, **kwargs):
         # data['z'] : (N, z, H, W)
         
         N, z_dim, H, W = data['z'].size()
+        if not self.z_activation:
+            data['z'] = self.z_activation(data['z'])
         z = data['z'].permute(0, 2, 3, 1).reshape(N*H*W, z_dim)
         outputs = self.bottle(z)
         data.update(outputs)

@@ -16,9 +16,17 @@ class Model(nn.Module):
         self.decoder = decoder
         
     def forward(self, data, **kwargs):
-        data.update(self.encoder(data, **kwargs))
-        data.update(self.prior(data, **kwargs))
-        data.update(self.latent(data, **kwargs))
-        data.update(self.quantizer(data, **kwargs))
+        if 'encoder_freeze' in kwargs:
+            with torch.no_grad():
+                data.update(self.encoder(data, **kwargs))
+                data.update(self.prior(data, **kwargs))
+                data.update(self.latent(data, **kwargs))
+                data.update(self.quantizer(data, **kwargs))
+        else:
+            data.update(self.encoder(data, **kwargs))
+            data.update(self.prior(data, **kwargs))
+            data.update(self.latent(data, **kwargs))
+            data.update(self.quantizer(data, **kwargs))
+        
         data.update(self.decoder(data, **kwargs))
         return data
