@@ -13,7 +13,7 @@ class Bottle(nn.Module):
         self.register_buffer('codebook', torch.zeros(self.K, self.latent_channels))
         self.threshold = 1.0
         self.mu = 0.99
-        self.register_buffer('init', torch.zeros(1)) 
+        self.register_buffer('init', torch.zeros(1))
                 
     def _quantize(self, ze):
         # ze : (n, c)
@@ -24,6 +24,9 @@ class Bottle(nn.Module):
                    (self.codebook.T**2).sum(0, keepdim=True)
         # (n,), (n,)
         min_distance, zi = torch.min(distance, dim=-1)
+        # (K,)
+        min_distance, _ = torch.min(distance, dim=0)
+        
         return zi
     
     def _dequantize(self, zi):
@@ -144,4 +147,6 @@ class Latent(nn.Module):
         # (N, z, H, W)
         data['z'] = data['zq'].reshape(N, H, W, z_dim).permute(0, 3, 1, 2)
         data['zi'] = outputs['zi']
+
+        
         return data

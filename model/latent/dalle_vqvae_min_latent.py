@@ -26,8 +26,9 @@ class Bottle(nn.Module):
         min_distance, zi = torch.min(distance, dim=-1)
         # (K,)
         min_distance, _ = torch.min(distance, dim=0)
+        min_loss = torch.mean(min_distance)
         
-        return zi
+        return zi, min_loss
     
     def _dequantize(self, zi):
         # zi : (n,)
@@ -101,7 +102,7 @@ class Bottle(nn.Module):
             # (K, c)
             codebook_new = self.codebook_sum / self.codebook_elem.unsqueeze(1)
             # (k, c)
-            self.codebook = usage*codebook_new + (1-usage)*codebook_random
+            self.codebook = usage*codebook_new #+ (1-usage)*codebook_random
             outputs = {'usage': usage.sum(),
                        'entropy': entropy}
             return outputs
@@ -114,7 +115,7 @@ class Bottle(nn.Module):
             self._initialize(ze)
                         
         # z_index : (b,)
-        zi = self._quantize(ze)
+        zi, min_loss = self._quantize(ze)
         # z_quantized : (b, c)
         zq = self._dequantize(zi)
         # update codebook
@@ -124,6 +125,7 @@ class Bottle(nn.Module):
         # pass-through
         zq = ze + (zq - ze).detach() * q_level
         outputs = {'commit_loss': commit_loss,
+                   'min_loss': min_loss,
                    'zi': zi,
                    'zq': zq}
         outputs.update(update_outputs)
@@ -147,6 +149,5 @@ class Latent(nn.Module):
         # (N, z, H, W)
         data['z'] = data['zq'].reshape(N, H, W, z_dim).permute(0, 3, 1, 2)
         data['zi'] = outputs['zi']
-
         
         return data
