@@ -35,7 +35,7 @@ def load(save_dir, step, model, optimizer):
     path = save_dir + 'save_' + str(step)
     checkpoint = torch.load(path, map_location=torch.device('cpu'))    
     step = checkpoint['step']
-    model.load_state_dict(checkpoint['model_state_dict'], strict=strict)
+    model.load_state_dict(checkpoint['model_state_dict'], strict=True)
     optimizer.load_state_dict(checkpoint['optimizer_state_dict']) 
     return step, model, optimizer
 

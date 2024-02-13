@@ -21,5 +21,6 @@ class Model(nn.Module):
         return data
     
     def sample(self, z):
+        z = self.latent.sample(z)
         y = self.decoder.sample(z)
         return y

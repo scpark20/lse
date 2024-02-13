@@ -9,6 +9,8 @@ class Prior(nn.Module):
     def forward(self, data, **kwargs):
 
         M = kwargs['M']
+        if M is None:
+            M = len(data['z'])
         z_dim = data['z'].shape[1]
         
         # (M, z)
